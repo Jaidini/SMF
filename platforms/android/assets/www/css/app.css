@@ -8,6 +8,11 @@
 	src: url("../fonts/Blade.ttf") format("truetype");
 }
 
+@font-face{
+	font-family: "Blade2";
+	src: url("../fonts/BLADE2.TTF") format("truetype");
+}
+
 body,
 html {
 	overflow-y: hidden;	
@@ -18,7 +23,15 @@ html {
 
 h1 {
 	font-size: 70pt;
-	font-family: Blade;
+	font-family: Blade2;
+	color: #FFFFFF;
+}
+
+h2 {
+	margin-top: 70px;
+	margin-right: 10px;
+	margin-left: 10px;
+	font-family: Blade2;
 	color: #FFFFFF;
 }
 
@@ -39,7 +52,6 @@ a {
 	bottom: 0;
 	height: 64px;
 	width: 107%;
-	background-color: #000000;
 }
 
 .adios {
@@ -50,4 +62,8 @@ a {
 	background-color: #2EFEF7;
 	border-color: black;
 	color: black;
+}
+
+.abajo {
+	margin-top: 70%;
 }
