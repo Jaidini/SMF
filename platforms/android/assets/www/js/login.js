@@ -2,6 +2,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 var db = null;
 
+
 function onDeviceReady() {
 
 	// Abrimos o creamos la bbdd interna
@@ -13,25 +14,22 @@ function onDeviceReady() {
 	}, function(error) {
 		alert('Transaction ERROR: ' + error.message);
 	}, function() {
-		console.log('Populated database OK');
+		alert('Populated database OK');
 	});
 
-	// Comprobamos si hay algún usuario en la bbdd
-	db.transaction(function(tx) {
-		tx.executeSql('SELECT * FROM smf WHERE id = ?', [1], function(tx, res) {
-			alert(res.rows.length);
-			if (res.rows.length == 0) {
-				window.location.href = "elige.html";
-			} else {
+	$("#btnLogin").click(function() {
+		var user = $("#nomUser").val();
+		var pass = $("#passUser").val();
+		$.ajax({
+			type: "POST",
+			url: "http://smfdatabase.esy.es/pruebaServidor/comprueba.php",
+			data: ({name: user, password: pass})
+		}).done(function(data) {
+			if (data == "1") {
 				window.location.href = "pantallaPrincipal.html";
+			} else {
+				navigator.notification.alert("Usuario o contraseña incorrectos");
 			}
-		}, function(error) {
-			alert("Error en executeSql");
 		});
-	}, function(error) {
-		alert('Transaction ERROR: ' + error.message);
-	}, function() {
-		console.log('SELECT OK');
 	});
-
 }

@@ -9,21 +9,21 @@ function onDeviceReady() {
 
 	// Creamos, si no existen, la tabla de usuarios
 	db.transaction(function(tx) {
-		tx.executeSql('CREATE TABLE IF NOT EXISTS smf (id integer primary key unique, name text)');
-		tx.executeSql('INSERT INTO smf (id, name) VALUES (1, "No")');
+		tx.executeSql('CREATE TABLE IF NOT EXISTS smf (id integer primary key unique, name text, pass text)');
 	}, function(error) {
 		alert('Transaction ERROR: ' + error.message);
 	}, function() {
-		alert('Populated database OK');
+		console.log('Populated database OK');
 	});
 
 	// Comprobamos si hay algún usuario en la bbdd
 	db.transaction(function(tx) {
 		tx.executeSql('SELECT * FROM smf WHERE id = ?', [1], function(tx, res) {
-			if (res.rows.item(0).name != "No") {
-				window.location.href = "pantallaPrincipal.html";
-			} else {
+			alert(res.rows.length);
+			if (res.rows.length == 0) {
 				window.location.href = "elige.html";
+			} else {
+				window.location.href = "pantallaPrincipal.html";
 			}
 		}, function(error) {
 			alert("Error en executeSql");
@@ -31,7 +31,7 @@ function onDeviceReady() {
 	}, function(error) {
 		alert('Transaction ERROR: ' + error.message);
 	}, function() {
-		alert('SELECT OK');
+		console.log('SELECT OK');
 	});
 
 }
