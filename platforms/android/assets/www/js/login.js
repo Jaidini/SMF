@@ -2,19 +2,23 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 var db = null;
 
-
 function onDeviceReady() {
 
 	// Abrimos o creamos la bbdd interna
 	db = window.sqlitePlugin.openDatabase({name: 'smf.db', location: 'default'});
 
-	// Creamos, si no existen, la tabla de usuarios
-	db.transaction(function(tx) {
-		tx.executeSql('CREATE TABLE IF NOT EXISTS smf (id integer primary key unique, name text, pass text)');
-	}, function(error) {
-		alert('Transaction ERROR: ' + error.message);
-	}, function() {
-		alert('Populated database OK');
+	$("#btnLogin").click(function() {
+		var user = $("#nomUser").val();
+		var pass = $("#passUser").val();
+		db.transaction(function(tx) {
+			alert("antes de executeSql");
+			tx.executeSql('INSERT INTO smf (id, name, pass) VALUES (?,?,?)', [1, user, pass]);
+			alert("despues de executeSql");
+		}, function(error) {
+			alert('Transaction ERROR: ' + error.message);
+		}, function() {
+			alert('Populated database OK');
+		});
 	});
 
 	$("#btnLogin").click(function() {
@@ -24,12 +28,16 @@ function onDeviceReady() {
 			type: "POST",
 			url: "http://smfdatabase.esy.es/pruebaServidor/comprueba.php",
 			data: ({name: user, password: pass})
-		}).done(function(data) {
+		})
+		.done(function(data) {
 			if (data == "1") {
 				window.location.href = "pantallaPrincipal.html";
 			} else {
 				navigator.notification.alert("Usuario o contraseña incorrectos");
 			}
+		})
+		.fail(function() {
+			alert("Error en el ajax");
 		});
 	});
 }
