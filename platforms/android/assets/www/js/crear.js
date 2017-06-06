@@ -35,7 +35,6 @@ function onDeviceReady() {
 			data: ({name: user, password: pass, documento: dni, fecha: fec, city: ciudad, emilio: mail, mal: maltrato})
 		})
 		.done(function(data) {
-			alert(data);
 			if (data == "1") {
 				window.location.href = "pantallaPrincipal.html";
 			} else {
@@ -43,8 +42,12 @@ function onDeviceReady() {
 			}
 		})
 		.fail(function(data) {
-			alert(data);
-			alert("Error en el ajax");
+			if (data == "Ese usuario ya existe") {
+				alert(data);
+			} else {
+				alert("Error en el envío de datos");
+				alert(data);
+			}
 		});
 	});
 }
