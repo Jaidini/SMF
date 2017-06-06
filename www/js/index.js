@@ -19,14 +19,13 @@ function onDeviceReady() {
 	// Comprobamos si hay algún usuario en la bbdd
 	db.transaction(function(tx) {
 		tx.executeSql('SELECT * FROM smf WHERE id = ?', [1], function(tx, res) {
-			alert(res.rows.length);
 			if (res.rows.length == 0) {
 				window.location.href = "elige.html";
 			} else {
 				window.location.href = "pantallaPrincipal.html";
 			}
 		}, function(error) {
-			alert("Error en executeSql");
+			alert("Fatal Error");
 		});
 	}, function(error) {
 		alert('Transaction ERROR: ' + error.message);

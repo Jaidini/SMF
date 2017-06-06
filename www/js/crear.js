@@ -11,13 +11,11 @@ function onDeviceReady() {
 		var user = $("#nomUser").val();
 		var pass = $("#passUser").val();
 		db.transaction(function(tx) {
-			alert("antes de executeSql");
 			tx.executeSql('INSERT INTO smf (id, name, pass) VALUES (?,?,?)', [1, user, pass]);
-			alert("despues de executeSql");
 		}, function(error) {
 			alert('Transaction ERROR: ' + error.message);
 		}, function() {
-			alert('Populated database OK');
+			console.log('Populated database OK');
 		});
 	});
 
@@ -46,7 +44,6 @@ function onDeviceReady() {
 				alert(data);
 			} else {
 				alert("Error en el envío de datos");
-				alert(data);
 			}
 		});
 	});

@@ -20,7 +20,7 @@ function onDeviceReady() {
 			tx.executeSql('SELECT * FROM smf WHERE id = ?', [1], function(tx, res) {
 				user = res.rows.item(0).name;
 			}, function(error) {
-				alert("Error en executeSql");
+				alert("Fatal Error");
 			});
 		}, function(error) {
 			alert('Transaction ERROR: ' + error.message);
@@ -43,9 +43,6 @@ function onDeviceReady() {
 			latitud = position.coords.latitude;
 			longitud = position.coords.longitude;
 
-			alert(user);
-			alert(latitud);
-			alert(longitud);
 			// Así se busca en google maps con coordenadas: https://www.google.es/maps/@41.6474246,-0.9152144,15z
 			var localizacion = "https://www.google.es/maps/@" + latitud + "," + longitud + "z"
 
@@ -57,10 +54,9 @@ function onDeviceReady() {
 			})
 			.done(function(data) {
 				if (data == "1") {
-					alert("Aviso insertado");
+					console.log("Aviso insertado");
 				} else {
 					alert("Error en el envío de datos");
-					alert(data);
 				}
 			})
 			.fail(function() {
@@ -69,7 +65,8 @@ function onDeviceReady() {
    		}
 
 		function onError(error) {
-			alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
+			console.log('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+			navigator.app.exitApp();
 		}
 	}
 }
