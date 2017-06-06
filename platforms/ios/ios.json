@@ -19,6 +19,20 @@
                         {
                             "xml": "<feature name=\"SQLitePlugin\"><param name=\"ios-package\" value=\"SQLitePlugin\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Geolocation\"><param name=\"ios-package\" value=\"CDVLocation\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "*-Info.plist": {
+                "parents": {
+                    "NSLocationWhenInUseUsageDescription": [
+                        {
+                            "xml": "<string> </string>",
+                            "count": 1
                         }
                     ]
                 }
@@ -36,6 +50,13 @@
             "PACKAGE_NAME": "com.smfproject.SMF"
         },
         "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.smfproject.SMF"
+        },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.smfproject.SMF"
+        },
+        "cordova-plugin-geolocation": {
+            "GEOLOCATION_USAGE_DESCRIPTION": " ",
             "PACKAGE_NAME": "com.smfproject.SMF"
         }
     },
@@ -73,12 +94,46 @@
             "clobbers": [
                 "SQLitePlugin"
             ]
+        },
+        {
+            "id": "cordova-plugin-geolocation.Coordinates",
+            "file": "plugins/cordova-plugin-geolocation/www/Coordinates.js",
+            "pluginId": "cordova-plugin-geolocation",
+            "clobbers": [
+                "Coordinates"
+            ]
+        },
+        {
+            "id": "cordova-plugin-geolocation.PositionError",
+            "file": "plugins/cordova-plugin-geolocation/www/PositionError.js",
+            "pluginId": "cordova-plugin-geolocation",
+            "clobbers": [
+                "PositionError"
+            ]
+        },
+        {
+            "id": "cordova-plugin-geolocation.Position",
+            "file": "plugins/cordova-plugin-geolocation/www/Position.js",
+            "pluginId": "cordova-plugin-geolocation",
+            "clobbers": [
+                "Position"
+            ]
+        },
+        {
+            "id": "cordova-plugin-geolocation.geolocation",
+            "file": "plugins/cordova-plugin-geolocation/www/geolocation.js",
+            "pluginId": "cordova-plugin-geolocation",
+            "clobbers": [
+                "navigator.geolocation"
+            ]
         }
     ],
     "plugin_metadata": {
         "cordova-plugin-dialogs": "1.3.3",
         "cordova-plugin-network-information": "1.3.3",
         "cordova-plugin-whitelist": "1.3.2",
-        "cordova-sqlite-storage": "2.0.4"
+        "cordova-sqlite-storage": "2.0.4",
+        "cordova-plugin-compat": "1.1.0",
+        "cordova-plugin-geolocation": "2.4.3"
     }
 }

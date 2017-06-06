@@ -13,6 +13,9 @@
     <feature name="SQLitePlugin">
         <param name="android-package" value="io.sqlc.SQLitePlugin" />
     </feature>
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
+    </feature>
     <name>SMF</name>
     <description>
         SMF es una aplicación que hace de intermediario entre una posible víctima de maltrato y la policía.
